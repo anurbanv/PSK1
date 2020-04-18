@@ -16,6 +16,10 @@ public class CompanyDAO {
         this.em.persist(company);
     }
 
+    public Company findById(Integer id) {
+        return em.find(Company.class, id);
+    }
+
     public List<Company> loadAll() {
         return em.createNamedQuery("Company.findAll", Company.class).getResultList();
     }
