@@ -15,12 +15,23 @@
     <ui:repeat value="#{companyDetails.company.driverList}" var="driver">
         <h:form>
             <div>
-                #{driver.name} #{driver.carList.size()}
+                #{driver.name}
                 <h:commandButton value="X" action="#{companyDetails.removeDriver(driver.id)}">
                     <f:param name="companyId" value="#{companyDetails.company.id}"/>
                 </h:commandButton>
             </div>
         </h:form>
+        CARS OWNED:
+        <ui:repeat value="#{driver.carList}" var="car">
+            <h:form>
+                <div>
+                    #{car.carNr}
+                    <h:commandButton value="X" action="#{companyDetails.removeCarFromDriver(car.id, driver.id)}">
+                        <f:param name="companyId" value="#{companyDetails.company.id}"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
+        </ui:repeat>
     </ui:repeat>
 
     <h3>Car list: (#{companyDetails.company.carList.size()})</h3>

@@ -96,6 +96,21 @@ public class CompanyDetails {
         return getReturnUrl();
     }
 
+    @Transactional
+    @LoggedInvocation
+    public String removeCarFromDriver(Integer carId, Integer driverId) {
+        Driver driver = driverDAO.findById(driverId);
+        List<Car> carList = driver.getCarList();
+
+        for (Car car1 : carList) {
+            if (car1.getId().equals(carId)) {
+                carList.remove(car1);
+                break;
+            }
+        }
+        return getReturnUrl();
+    }
+
     private String getReturnUrl() {
         return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
     }
