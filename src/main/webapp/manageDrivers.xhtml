@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<h:body>
+    <h:button value="Done" outcome="companyDetails?companyId=#{manageDrivers.company.id}"/>
+
+    <h1>#{manageDrivers.company.name}</h1>
+
+    <h3>Driver list: (#{manageDrivers.company.driverList.size()})</h3>
+    <ui:repeat value="#{manageDrivers.company.driverList}" var="driver">
+        <h:form>
+            <div>
+                #{driver.name}
+                <h:commandButton value="X" action="#{manageDrivers.removeDriver(driver.id)}">
+                    <f:param name="companyId" value="#{manageDrivers.company.id}"/>
+                </h:commandButton>
+            </div>
+        </h:form>
+    </ui:repeat>
+
+    <h2>Add driver</h2>
+    <h:form>
+        Driver name:
+        <h:inputText value="#{manageDrivers.newDriver.name}" required="true"/>
+        <h:commandButton value="Create" action="#{manageDrivers.createDriver}">
+            <f:param name="companyId" value="#{manageDrivers.company.id}"/>
+        </h:commandButton>
+    </h:form>
+
+</h:body>
+</html>
