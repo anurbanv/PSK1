@@ -16,6 +16,10 @@ public class CompanyDAO {
         em.persist(company);
     }
 
+    public void remove(Integer id) {
+        em.remove(findById(id));
+    }
+
     public Company findById(Integer id) {
         return em.find(Company.class, id);
     }

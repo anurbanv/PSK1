@@ -73,7 +73,14 @@ public class CompanyDetails {
         return getReturnUrl();
     }
 
+    @Transactional
+    @LoggedInvocation
+    public String deleteCompany() {
+        companyDAO.remove(company.getId());
+        return "index";
+    }
+
     private String getReturnUrl() {
-        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
+        return "companyDetails?faces-redirect=true&companyId=" + company.getId();
     }
 }

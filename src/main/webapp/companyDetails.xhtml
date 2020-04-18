@@ -46,5 +46,11 @@
         </h:commandButton>
     </h:form>
 
+    <h:form>
+        <h:commandButton value="DELETE" action="#{companyDetails.deleteCompany}">
+            <f:param name="companyId" value="#{companyDetails.company.id}"/>
+        </h:commandButton>
+    </h:form>
+
 </h:body>
 </html>
