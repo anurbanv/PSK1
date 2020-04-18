@@ -12,19 +12,19 @@ public class CarDAO {
     @Inject
     private EntityManager em;
 
-    public void persist(Car car){
+    public void add(Car car){
         em.persist(car);
-    }
-
-    public Car findById(Integer id) {
-        return em.find(Car.class, id);
     }
 
     public void remove(Integer id) {
         em.remove(findById(id));
     }
 
-    public List<Car> loadAll() {
+    public Car findById(Integer id) {
+        return em.find(Car.class, id);
+    }
+
+    public List<Car> findAll() {
         return em.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
 }

@@ -50,7 +50,7 @@ public class CompanyDetails {
     @LoggedInvocation
     public String createCar() {
         newCar.setCompany(company);
-        carDAO.persist(newCar);
+        carDAO.add(newCar);
         return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
     }
 
@@ -71,8 +71,8 @@ public class CompanyDetails {
     @Transactional
     @LoggedInvocation
     public String createDriver() {
-        newDriver.getCompanyList().add(company);
-        driverDAO.persist(newDriver);
+        newDriver.setCompany(company);
+        driverDAO.add(newDriver);
         return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
     }
 }

@@ -18,19 +18,19 @@ public class Companies {
 
     @Getter
     @Setter
-    private Company companyToCreate = new Company();
+    private Company newCompany = new Company();
 
     @Getter
     private List<Company> allCompanies;
 
     @PostConstruct
     public void init() {
-        this.allCompanies = companyDAO.loadAll();
+        this.allCompanies = companyDAO.findAll();
     }
 
     @Transactional
     public String createCompany() {
-        this.companyDAO.persist(companyToCreate);
+        this.companyDAO.add(newCompany);
         return "index?faces-redirect=true";
     }
 }

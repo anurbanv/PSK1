@@ -25,9 +25,6 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Car> carList = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "COMPANY_DRIVER",
-            joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "driver_id"))
+    @OneToMany(mappedBy = "company")
     private List<Driver> driverList = new ArrayList<>();
 }

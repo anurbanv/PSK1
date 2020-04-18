@@ -19,11 +19,16 @@ public class Driver {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "NAME")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name="COMPANY_ID")
+    private Company company;
+
     @ManyToMany
-    @JoinTable(name = "COMPANY_DRIVER",
+    @JoinTable(name = "CAR_DRIVER",
             joinColumns = @JoinColumn(name = "driver_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
-    private List<Company> companyList = new ArrayList<>();
+            inverseJoinColumns = @JoinColumn(name = "car_id"))
+    private List<Car> carList = new ArrayList<>();
 }

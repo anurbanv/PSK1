@@ -12,19 +12,19 @@ public class DriverDAO {
     @Inject
     private EntityManager em;
 
-    public void persist(Driver driver){
-        this.em.persist(driver);
-    }
-
-    public Driver findById(Integer id) {
-        return em.find(Driver.class, id);
+    public void add(Driver driver){
+        em.persist(driver);
     }
 
     public void remove(Integer id) {
         em.remove(findById(id));
     }
 
-    public List<Driver> loadAll() {
+    public Driver findById(Integer id) {
+        return em.find(Driver.class, id);
+    }
+
+    public List<Driver> findAll() {
         return em.createNamedQuery("Driver.findAll", Driver.class).getResultList();
     }
 }

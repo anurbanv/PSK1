@@ -12,15 +12,15 @@ public class CompanyDAO {
     @Inject
     private EntityManager em;
 
-    public void persist(Company company){
-        this.em.persist(company);
+    public void add(Company company){
+        em.persist(company);
     }
 
     public Company findById(Integer id) {
         return em.find(Company.class, id);
     }
 
-    public List<Company> loadAll() {
+    public List<Company> findAll() {
         return em.createNamedQuery("Company.findAll", Company.class).getResultList();
     }
 }

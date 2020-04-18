@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -24,4 +26,10 @@ public class Car implements Serializable {
     @ManyToOne
     @JoinColumn(name="COMPANY_ID")
     private Company company;
+
+    @ManyToMany
+    @JoinTable(name = "CAR_DRIVER",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "driver_id"))
+    private List<Driver> driverList = new ArrayList<>();
 }

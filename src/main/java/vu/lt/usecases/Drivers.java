@@ -18,19 +18,19 @@ public class Drivers {
 
     @Getter
     @Setter
-    private Driver driverToCreate = new Driver();
+    private Driver newDriver = new Driver();
 
     @Getter
     private List<Driver> allDrivers;
 
     @PostConstruct
     public void init() {
-        this.allDrivers = driverDAO.loadAll();
+        this.allDrivers = driverDAO.findAll();
     }
 
     @Transactional
     public String createDriver() {
-        this.driverDAO.persist(driverToCreate);
+        this.driverDAO.add(newDriver);
         return "index?faces-redirect=true";
     }
 }

@@ -18,19 +18,19 @@ public class Cars {
 
     @Getter
     @Setter
-    private Car carToCreate = new Car();
+    private Car newCar = new Car();
 
     @Getter
     private List<Car> allCars;
 
     @PostConstruct
     public void init() {
-        this.allCars = carDAO.loadAll();
+        this.allCars = carDAO.findAll();
     }
 
     @Transactional
     public String createCar() {
-        this.carDAO.persist(carToCreate);
+        this.carDAO.add(newCar);
         return "index?faces-redirect=true";
     }
 }
