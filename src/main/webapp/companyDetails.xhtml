@@ -15,7 +15,7 @@
     <ui:repeat value="#{companyDetails.company.driverList}" var="driver">
         <h:form>
             <div>
-                #{driver.name}
+                #{driver.name} #{driver.carList.size()}
                 <h:commandButton value="X" action="#{companyDetails.removeDriver(driver.id)}">
                     <f:param name="companyId" value="#{companyDetails.company.id}"/>
                 </h:commandButton>
@@ -35,6 +35,15 @@
         </h:form>
     </ui:repeat>
 
+    <h2>Add driver</h2>
+    <h:form>
+        Driver name:
+        <h:inputText value="#{companyDetails.newDriver.name}" required="true"/>
+        <h:commandButton value="Create" action="#{companyDetails.createDriver}">
+            <f:param name="companyId" value="#{companyDetails.company.id}"/>
+        </h:commandButton>
+    </h:form>
+
     <h2>Add car</h2>
     <h:form>
         Car nr:
@@ -44,11 +53,18 @@
         </h:commandButton>
     </h:form>
 
-    <h2>Add driver</h2>
+    <h2>Assign car to driver</h2>
     <h:form>
-        Driver name:
-        <h:inputText value="#{companyDetails.newDriver.name}" required="true"/>
-        <h:commandButton value="Create" action="#{companyDetails.createDriver}">
+        <h:selectOneMenu value="#{selectData.driverId}">
+            <f:selectItems value="#{companyDetails.company.driverList}" var="driver" itemValue="#{driver.id}"
+                           itemLabel="#{driver.name}"/>
+        </h:selectOneMenu>
+        <h:selectOneMenu value="#{selectData.carId}">
+            <f:selectItems value="#{companyDetails.company.carList}" var="car" itemValue="#{car.id}"
+                           itemLabel="#{car.carNr}"/>
+        </h:selectOneMenu>
+        <h:commandButton value="Submit"
+                         action="#{companyDetails.assignCarToDriver(selectData.carId, selectData.driverId)}">
             <f:param name="companyId" value="#{companyDetails.company.id}"/>
         </h:commandButton>
     </h:form>

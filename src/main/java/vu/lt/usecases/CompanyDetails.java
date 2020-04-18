@@ -15,6 +15,7 @@ import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 
 @Model
@@ -51,21 +52,14 @@ public class CompanyDetails {
     public String createCar() {
         newCar.setCompany(company);
         carDAO.add(newCar);
-        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
+        return getReturnUrl();
     }
 
     @Transactional
     @LoggedInvocation
     public String removeCar(Integer id) {
         carDAO.remove(id);
-        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
-    }
-
-    @Transactional
-    @LoggedInvocation
-    public String removeDriver(Integer id) {
-        driverDAO.remove(id);
-        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
+        return getReturnUrl();
     }
 
     @Transactional
@@ -73,6 +67,36 @@ public class CompanyDetails {
     public String createDriver() {
         newDriver.setCompany(company);
         driverDAO.add(newDriver);
+        return getReturnUrl();
+    }
+
+    @Transactional
+    @LoggedInvocation
+    public String removeDriver(Integer id) {
+        driverDAO.remove(id);
+        return getReturnUrl();
+    }
+
+    @Transactional
+    @LoggedInvocation
+    public String assignCarToDriver(Integer carId, Integer driverId) {
+        Car car = carDAO.findById(carId);
+        Driver driver = driverDAO.findById(driverId);
+        List<Car> carList = driver.getCarList();
+        boolean exists = false;
+        for (Car car1 : carList) {
+            if (car1.getId().equals(car.getId())) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            driver.getCarList().add(car);
+        }
+        return getReturnUrl();
+    }
+
+    private String getReturnUrl() {
         return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
     }
 }
