@@ -13,7 +13,15 @@ public class CarDAO {
     private EntityManager em;
 
     public void persist(Car car){
-        this.em.persist(car);
+        em.persist(car);
+    }
+
+    public Car findById(Integer id) {
+        return em.find(Car.class, id);
+    }
+
+    public void remove(Integer id) {
+        em.remove(findById(id));
     }
 
     public List<Car> loadAll() {

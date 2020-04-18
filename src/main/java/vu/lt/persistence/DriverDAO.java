@@ -16,6 +16,14 @@ public class DriverDAO {
         this.em.persist(driver);
     }
 
+    public Driver findById(Integer id) {
+        return em.find(Driver.class, id);
+    }
+
+    public void remove(Integer id) {
+        em.remove(findById(id));
+    }
+
     public List<Driver> loadAll() {
         return em.createNamedQuery("Driver.findAll", Driver.class).getResultList();
     }

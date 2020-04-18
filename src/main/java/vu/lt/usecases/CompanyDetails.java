@@ -56,6 +56,20 @@ public class CompanyDetails {
 
     @Transactional
     @LoggedInvocation
+    public String removeCar(Integer id) {
+        carDAO.remove(id);
+        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
+    }
+
+    @Transactional
+    @LoggedInvocation
+    public String removeDriver(Integer id) {
+        driverDAO.remove(id);
+        return "companyDetails?faces-redirect=true&companyId=" + this.company.getId();
+    }
+
+    @Transactional
+    @LoggedInvocation
     public String createDriver() {
         newDriver.getCompanyList().add(company);
         driverDAO.persist(newDriver);

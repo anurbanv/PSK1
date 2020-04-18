@@ -7,16 +7,32 @@
 >
 <h:head/>
 <h:body>
+    <h:button value="Back to companies" outcome="index"/>
+
     <h1>#{companyDetails.company.name}</h1>
 
     <h3>Driver list: (#{companyDetails.company.driverList.size()})</h3>
     <ui:repeat value="#{companyDetails.company.driverList}" var="driver">
-        <div>#{driver.name}</div>
+        <h:form>
+            <div>
+                #{driver.name}
+                <h:commandButton value="X" action="#{companyDetails.removeDriver(driver.id)}">
+                    <f:param name="companyId" value="#{companyDetails.company.id}"/>
+                </h:commandButton>
+            </div>
+        </h:form>
     </ui:repeat>
 
     <h3>Car list: (#{companyDetails.company.carList.size()})</h3>
     <ui:repeat value="#{companyDetails.company.carList}" var="car">
-        <div>#{car.carNr}</div>
+        <h:form>
+            <div>
+                #{car.carNr}
+                <h:commandButton value="X" action="#{companyDetails.removeCar(car.id)}">
+                    <f:param name="companyId" value="#{companyDetails.company.id}"/>
+                </h:commandButton>
+            </div>
+        </h:form>
     </ui:repeat>
 
     <h2>Add car</h2>
@@ -24,7 +40,7 @@
         Car nr:
         <h:inputText value="#{companyDetails.newCar.carNr}" required="true"/>
         <h:commandButton value="Create" action="#{companyDetails.createCar}">
-            <f:param name="companyId" value="#{companyDetails.company.id}" />
+            <f:param name="companyId" value="#{companyDetails.company.id}"/>
         </h:commandButton>
     </h:form>
 
@@ -33,7 +49,7 @@
         Driver name:
         <h:inputText value="#{companyDetails.newDriver.name}" required="true"/>
         <h:commandButton value="Create" action="#{companyDetails.createDriver}">
-            <f:param name="companyId" value="#{companyDetails.company.id}" />
+            <f:param name="companyId" value="#{companyDetails.company.id}"/>
         </h:commandButton>
     </h:form>
 
