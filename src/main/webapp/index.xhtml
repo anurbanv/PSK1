@@ -20,5 +20,15 @@
         <h:inputText value="#{companies.newCompany.name}" required="true"/>
         <h:commandButton value="Create" action="#{companies.createCompany}"/>
     </h:form>
+
+    <h3>All drivers (#{drivers.allDrivers.size()})</h3>
+    <ui:repeat value="#{drivers.allDrivers}" var="driver">
+        <div>#{driver.name}</div>
+    </ui:repeat>
+
+    <h3>All cars (#{cars.allCars.size()})</h3>
+    <ui:repeat value="#{cars.allCars}" var="car">
+        <div>#{car.carNr}</div>
+    </ui:repeat>
 </h:body>
 </html>

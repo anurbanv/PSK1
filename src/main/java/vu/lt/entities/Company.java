@@ -22,9 +22,9 @@ public class Company {
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
     private List<Car> carList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
     private List<Driver> driverList = new ArrayList<>();
 }
