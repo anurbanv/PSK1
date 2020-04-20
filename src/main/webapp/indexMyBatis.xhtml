@@ -8,30 +8,27 @@
     <link href="style.css" rel="stylesheet" type="text/css"/>
 </h:head>
 <h:body>
-    <h2>My companies (#{companies.allCompanies.size()})</h2>
+    <h2>My companies (#{companiesMyBatis.allCompanies.size()})</h2>
 
-    <ui:repeat value="#{companies.allCompanies}" var="comp">
+    <ui:repeat value="#{companiesMyBatis.allCompanies}" var="comp">
         <h:button class="btnCompany" value="#{comp.name}" outcome="companyDetails?companyId=#{comp.id}"/>
     </ui:repeat>
 
     <h2>Start new company</h2>
     <h:form>
         Company name
-        <h:inputText value="#{companies.newCompany.name}" required="true"/>
-        <h:commandButton value="Create" action="#{companies.createCompany}"/>
+        <h:inputText value="#{companiesMyBatis.newCompany.name}" required="true"/>
+        <h:commandButton value="Create" action="#{companiesMyBatis.createCompany}"/>
     </h:form>
 
-    <h3>All drivers (#{drivers.allDrivers.size()})</h3>
-    <ui:repeat value="#{drivers.allDrivers}" var="driver">
+    <h3>All drivers (#{driversMyBatis.allDrivers.size()})</h3>
+    <ui:repeat value="#{driversMyBatis.allDrivers}" var="driver">
         <div>#{driver.name}</div>
     </ui:repeat>
 
-    <h3>All cars (#{cars.allCars.size()})</h3>
-    <ui:repeat value="#{cars.allCars}" var="car">
+    <h3>All cars (#{carsMyBatis.allCars.size()})</h3>
+    <ui:repeat value="#{carsMyBatis.allCars}" var="car">
         <div>#{car.carNr}</div>
     </ui:repeat>
-
-    <h:button value="MyBatis" outcome="indexMyBatis"/>
-
 </h:body>
 </html>
