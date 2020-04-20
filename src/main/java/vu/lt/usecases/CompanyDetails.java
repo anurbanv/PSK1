@@ -77,7 +77,7 @@ public class CompanyDetails {
     @LoggedInvocation
     public String deleteCompany() {
         companyDAO.remove(company.getId());
-        return "index";
+        return "index&faces-redirect=true";
     }
 
     private String getReturnUrl() {

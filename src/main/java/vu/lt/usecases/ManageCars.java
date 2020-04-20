@@ -54,6 +54,6 @@ public class ManageCars {
     }
 
     private String getReturnUrl() {
-        return "manageCars?faces-redirect=true&companyId=" + this.company.getId();
+        return "manageCars?faces-redirect=true&companyId=" + company.getId();
     }
 }

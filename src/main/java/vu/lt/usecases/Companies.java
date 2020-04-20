@@ -25,7 +25,7 @@ public class Companies {
 
     @PostConstruct
     public void init() {
-        this.allCompanies = companyDAO.findAll();
+        allCompanies = companyDAO.findAll();
     }
 
     @Transactional

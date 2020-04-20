@@ -54,6 +54,6 @@ public class ManageDrivers {
     }
 
     private String getReturnUrl() {
-        return "manageDrivers?faces-redirect=true&companyId=" + this.company.getId();
+        return "manageDrivers?faces-redirect=true&companyId=" + company.getId();
     }
 }
