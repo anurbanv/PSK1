@@ -1,6 +1,7 @@
 package vu.lt.persistence;
 
 import vu.lt.entities.Car;
+import vu.lt.services.LicencePlateVerifier;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -11,8 +12,11 @@ import java.util.List;
 public class CarDAO {
     @Inject
     private EntityManager em;
+    @Inject
+    LicencePlateVerifier plateVerifier;
 
-    public void add(Car car){
+    public void add(Car car) {
+        car.setCarNr(plateVerifier.formatNumber(car.getCarNr()));
         em.persist(car);
     }
 
