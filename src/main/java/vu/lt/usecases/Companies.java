@@ -7,7 +7,10 @@ import vu.lt.persistence.CompanyDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -30,7 +33,13 @@ public class Companies {
 
     @Transactional
     public String createCompany() {
-        this.companyDAO.add(newCompany);
+        try {
+            companyDAO.add(newCompany);
+        } catch (PersistenceException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Company name already exists", null));
+            return null;
+        }
         return "index?faces-redirect=true";
     }
 }
