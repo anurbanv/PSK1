@@ -17,11 +17,15 @@ public class CompanyDAO {
     }
 
     public void remove(Integer id) {
-        em.remove(findById(id));
+        em.remove(getById(id));
     }
 
-    public Company findById(Integer id) {
+    public Company getById(Integer id) {
         return em.find(Company.class, id);
+    }
+
+    public void update(Company company) {
+        em.merge(company);
     }
 
     public List<Company> findAll() {

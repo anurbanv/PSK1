@@ -35,7 +35,7 @@ public class ManageDrivers {
     private void init() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Integer companyId = Integer.parseInt(params.get("companyId"));
-        company = companyDAO.findById(companyId);
+        company = companyDAO.getById(companyId);
     }
 
     @Transactional
