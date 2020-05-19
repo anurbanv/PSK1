@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.SynchronizationType;
+import javax.transaction.TransactionScoped;
 
 @ApplicationScoped
 public class Resources {
-
     @PersistenceUnit
     private EntityManagerFactory emf;
 
@@ -24,6 +24,17 @@ public class Resources {
     }
 
     private void closeDefaultEntityManager(@Disposes @Default EntityManager em) {
+        em.close();
+    }
+
+    @Produces
+    @TransactionEM
+    @TransactionScoped
+    private EntityManager createJTATransactionalEntityManager() {
+        return emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
+    }
+
+    private void closeAsyncEntityManager(@Disposes @TransactionEM EntityManager em) {
         em.close();
     }
 }

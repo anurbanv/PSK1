@@ -52,5 +52,13 @@
         </h:commandButton>
     </h:form>
 
+    <h:form>
+        <h:outputText value="#{uploadCars.getUploadStatus(companyDetails.company.id)}" />
+        <h:commandButton value="Upload" disabled="#{uploadCars.isRunning(companyDetails.company.id)}"
+                         action="#{uploadCars.uploadCars(companyDetails.company.id)}">
+            <f:param name="companyId" value="#{companyDetails.company.id}" />
+        </h:commandButton>
+    </h:form>
+
 </h:body>
 </html>
