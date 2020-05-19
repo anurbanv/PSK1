@@ -9,12 +9,18 @@ import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.persistence.CarDAO;
 import vu.lt.persistence.CompanyDAO;
 import vu.lt.persistence.DriverDAO;
+import vu.lt.rest.contracts.CompanyDTO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Map;
 
@@ -74,10 +80,17 @@ public class CompanyDetails {
     }
 
     @Transactional
-    @LoggedInvocation
     public String deleteCompany() {
         companyDAO.remove(company.getId());
-        return "index&faces-redirect=true";
+        return "index?faces-redirect=true";
+    }
+
+    public String updateCompany() {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/psk1/api/companies/" + company.getId());
+        CompanyDTO companyDTO = new CompanyDTO(company);
+        target.request(MediaType.APPLICATION_JSON).put(Entity.entity(companyDTO, MediaType.APPLICATION_JSON), CompanyDTO.class);
+        return getReturnUrl();
     }
 
     private String getReturnUrl() {

@@ -22,6 +22,10 @@ public class Company {
     @Column(name = "NAME", unique = true)
     private String name;
 
+    @Version
+    @Column(name = "optimistic_lock_ver")
+    private Integer version;
+
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
     private List<Car> carList = new ArrayList<>();
 

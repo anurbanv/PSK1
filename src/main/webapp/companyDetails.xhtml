@@ -52,6 +52,7 @@
         </h:commandButton>
     </h:form>
 
+    <h2>Process cars</h2>
     <h:form>
         <h:outputText value="#{uploadCars.getUploadStatus(companyDetails.company.id)}" />
         <h:commandButton value="Upload" disabled="#{uploadCars.isRunning(companyDetails.company.id)}"
@@ -60,5 +61,13 @@
         </h:commandButton>
     </h:form>
 
+    <h2>Update name (version = #{companyDetails.company.version})</h2>
+    <h:form>
+        Company name
+        <h:inputText value="#{companyDetails.company.name}" required="true"/>
+        <h:commandButton value="Update" action="#{companyDetails.updateCompany}">
+            <f:param name="companyId" value="#{companyDetails.company.id}" />
+        </h:commandButton>
+    </h:form>
 </h:body>
 </html>
