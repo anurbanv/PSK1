@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import vu.lt.entities.Car;
 import vu.lt.entities.Company;
-import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.persistence.CarDAO;
 import vu.lt.persistence.CompanyDAO;
 import vu.lt.services.LicencePlateVerifier;
@@ -43,7 +42,6 @@ public class ManageCars {
     }
 
     @Transactional
-    @LoggedInvocation
     public String createCar() {
         if (plateVerifier.verifyNumber(newCar.getCarNr())) {
             newCar.setCompany(company);
@@ -57,7 +55,6 @@ public class ManageCars {
     }
 
     @Transactional
-    @LoggedInvocation
     public String removeCar(Integer id) {
         carDAO.remove(id);
         return getReturnUrl();

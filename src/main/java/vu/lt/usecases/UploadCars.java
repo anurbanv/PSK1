@@ -1,6 +1,5 @@
 package vu.lt.usecases;
 
-import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.services.IProcessCompanyCars;
 
 import javax.enterprise.context.SessionScoped;
@@ -22,7 +21,6 @@ public class UploadCars implements Serializable {
 
     private Map<Integer, CompletableFuture<Integer>> processTasks = new HashMap<>();
 
-    @LoggedInvocation
     public String uploadCars(Integer companyId) {
         processTasks.put(companyId, CompletableFuture.supplyAsync(() -> processCompanyCars.processCars(companyId)));
         return "companyDetails?faces-redirect=true&companyId=" + companyId;

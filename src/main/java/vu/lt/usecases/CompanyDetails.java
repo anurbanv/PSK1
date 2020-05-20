@@ -46,7 +46,6 @@ public class CompanyDetails {
     }
 
     @Transactional
-    @LoggedInvocation
     public String assignCarToDriver(Integer carId, Integer driverId) {
         Car car = carDAO.findById(carId);
         Driver driver = driverDAO.findById(driverId);
@@ -65,7 +64,6 @@ public class CompanyDetails {
     }
 
     @Transactional
-    @LoggedInvocation
     public String removeCarFromDriver(Integer carId, Integer driverId) {
         Driver driver = driverDAO.findById(driverId);
         List<Car> carList = driver.getCarList();
@@ -85,6 +83,7 @@ public class CompanyDetails {
         return "index?faces-redirect=true";
     }
 
+    @LoggedInvocation
     public String updateCompany() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080/psk1/api/companies/" + company.getId());

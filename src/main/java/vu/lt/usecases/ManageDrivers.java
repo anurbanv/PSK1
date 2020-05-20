@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import vu.lt.entities.Company;
 import vu.lt.entities.Driver;
-import vu.lt.interceptors.LoggedInvocation;
 import vu.lt.persistence.CompanyDAO;
 import vu.lt.persistence.DriverDAO;
 
@@ -39,7 +38,6 @@ public class ManageDrivers {
     }
 
     @Transactional
-    @LoggedInvocation
     public String createDriver() {
         newDriver.setCompany(company);
         driverDAO.add(newDriver);
@@ -47,7 +45,6 @@ public class ManageDrivers {
     }
 
     @Transactional
-    @LoggedInvocation
     public String removeDriver(Integer id) {
         driverDAO.remove(id);
         return getReturnUrl();
