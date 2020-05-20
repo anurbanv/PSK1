@@ -9,4 +9,7 @@
     <interceptors>
         <class>vu.lt.interceptors.MethodLogger</class>
     </interceptors>
+    <alternatives>
+        <class>vu.lt.services.SaveCompanyCars</class>
+    </alternatives>
 </beans>
