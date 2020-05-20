@@ -12,4 +12,7 @@
     <alternatives>
         <class>vu.lt.services.SaveCompanyCars</class>
     </alternatives>
+    <decorators>
+        <class>vu.lt.services.ProcessCarsDecorator</class>
+    </decorators>
 </beans>
