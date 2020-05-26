@@ -6,7 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 public class LicencePlateVerifier {
 
     public boolean verifyNumber(String carNr) {
-        return carNr.matches("^[A-Z]{3} ?[0-9]{3}$");
+        return carNr.length() == 7 || carNr.length() == 6;
     }
 
     public String formatNumber(String carNr) {
